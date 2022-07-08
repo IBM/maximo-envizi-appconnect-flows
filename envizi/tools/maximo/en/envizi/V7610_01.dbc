@@ -1,0 +1,836 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE script SYSTEM "script.dtd">
+
+<script author="dushyant.bangal@ibm.com" scriptname="script_plusz">
+  <description>EP</description>
+  <statements>
+    <freeform description="MAXENDPOINT">
+      <sql target="all">delete from maxendpoint where endpointname = 'PLUSZEXPORT'</sql>
+    </freeform>
+    <insert table="MAXENDPOINT" ignore_duplicates="true">
+      <insertrow>
+        <columnvalue column="ENDPOINTNAME" string="PLUSZEXPORT" />
+        <columnvalue column="HANDLERNAME" string="HTTP" />
+        <columnvalue column="CHANGEBY" string="WILSON" />
+        <columnvalue column="CHANGEDATE" date="sysdate" />
+        <columnvalue column="LANGCODE" string="EN" />
+        <columnvalue column="HASLD" boolean="false" />
+      </insertrow>
+    </insert>
+    <freeform description="MAXENDPOINTDTL">
+      <sql target="all">delete from maxendpointdtl where endpointname = 'PLUSZEXPORT'</sql>
+    </freeform>
+    <insert table="MAXENDPOINTDTL" ignore_duplicates="true">
+      <insertrow>
+        <columnvalue column="ENDPOINTNAME" string="PLUSZEXPORT" />
+        <columnvalue column="PROPERTY" string="CONNECTTIMEOUT" />
+        <columnvalue column="CHANGEBY" string="WILSON" />
+        <columnvalue column="CHANGEDATE" date="sysdate" />
+        <columnvalue column="ALLOWOVERRIDE" boolean="false" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="ENDPOINTNAME" string="PLUSZEXPORT" />
+        <columnvalue column="PROPERTY" string="COOKIES" />
+        <columnvalue column="CHANGEBY" string="WILSON" />
+        <columnvalue column="CHANGEDATE" date="sysdate" />
+        <columnvalue column="ALLOWOVERRIDE" boolean="false" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="ENDPOINTNAME" string="PLUSZEXPORT" />
+        <columnvalue column="PROPERTY" string="HEADERS" />
+        <columnvalue column="VALUE" string="X-IBM-Client-Id: YourAPIKeyHere,Content-Type: Application/json" />
+        <columnvalue column="CHANGEBY" string="WILSON" />
+        <columnvalue column="CHANGEDATE" date="sysdate" />
+        <columnvalue column="ALLOWOVERRIDE" boolean="false" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="ENDPOINTNAME" string="PLUSZEXPORT" />
+        <columnvalue column="PROPERTY" string="HTTPEXIT" />
+        <columnvalue column="CHANGEBY" string="WILSON" />
+        <columnvalue column="CHANGEDATE" date="sysdate" />
+        <columnvalue column="ALLOWOVERRIDE" boolean="false" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="ENDPOINTNAME" string="PLUSZEXPORT" />
+        <columnvalue column="PROPERTY" string="HTTPMETHOD" />
+        <columnvalue column="VALUE" string="POST" />
+        <columnvalue column="CHANGEBY" string="WILSON" />
+        <columnvalue column="CHANGEDATE" date="sysdate" />
+        <columnvalue column="ALLOWOVERRIDE" boolean="false" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="ENDPOINTNAME" string="PLUSZEXPORT" />
+        <columnvalue column="PROPERTY" string="PASSWORD" />
+        <columnvalue column="CHANGEBY" string="WILSON" />
+        <columnvalue column="CHANGEDATE" date="sysdate" />
+        <columnvalue column="ALLOWOVERRIDE" boolean="false" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="ENDPOINTNAME" string="PLUSZEXPORT" />
+        <columnvalue column="PROPERTY" string="READTIMEOUT" />
+        <columnvalue column="CHANGEBY" string="WILSON" />
+        <columnvalue column="CHANGEDATE" date="sysdate" />
+        <columnvalue column="ALLOWOVERRIDE" boolean="false" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="ENDPOINTNAME" string="PLUSZEXPORT" />
+        <columnvalue column="PROPERTY" string="URL" />
+        <columnvalue column="CHANGEBY" string="WILSON" />
+        <columnvalue column="CHANGEDATE" date="sysdate" />
+        <columnvalue column="ALLOWOVERRIDE" boolean="false" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="ENDPOINTNAME" string="PLUSZEXPORT" />
+        <columnvalue column="PROPERTY" string="USERNAME" />
+        <columnvalue column="CHANGEBY" string="WILSON" />
+        <columnvalue column="CHANGEDATE" date="sysdate" />
+        <columnvalue column="ALLOWOVERRIDE" boolean="false" />
+      </insertrow>
+    </insert>
+
+
+
+    <freeform description="MAXINTOBJECT">
+      <sql target="all">delete from maxintobject where intobjectname = 'PLUSZLOCATIONS'</sql>
+    </freeform>
+    <insert table="MAXINTOBJECT" ignore_duplicates="true">
+      <insertrow>
+        <columnvalue column="INTOBJECTNAME" string="PLUSZLOCATIONS" />
+        <columnvalue column="DESCRIPTION" string="Locations for Envizi integration." />
+        <columnvalue column="SELFREFERENCING" boolean="false" />
+        <columnvalue column="USERDEFINED" boolean="true" />
+        <columnvalue column="CHANGEBY" string="WILSON" />
+        <columnvalue column="CHANGEDATE" date="sysdate" />
+        <columnvalue column="LANGCODE" string="EN" />
+        <columnvalue column="HASLD" boolean="false" />
+        <columnvalue column="QUERYONLY" boolean="true" />
+        <columnvalue column="CONFIGURABLE" boolean="true" />
+        <columnvalue column="FLATSUPPORTED" boolean="true" />
+        <columnvalue column="USEWITH" string="INTEGRATION" />
+        <columnvalue column="ALIASCONFLICT" boolean="false" />
+        <columnvalue column="LOADQUERYFROMAPP" boolean="false" />
+        <columnvalue column="AUTOPAGINGTHRESHOLD" number="-1" />
+        <columnvalue column="TIMELINEATTRIBUTE" string="-1" />
+        <columnvalue column="PRIMARYAPI" boolean="false" />
+      </insertrow>
+    </insert>
+    <freeform description="MAXINTOBJDETAIL">
+      <sql target="all">delete from maxintobjdetail where intobjectname = 'PLUSZLOCATIONS'</sql>
+    </freeform>
+    <insert table="MAXINTOBJDETAIL" ignore_duplicates="true">
+      <insertrow>
+        <columnvalue column="INTOBJECTNAME" string="PLUSZLOCATIONS" />
+        <columnvalue column="OBJECTNAME" string="LOCATIONS" />
+        <columnvalue column="OBJECTORDER" number="1" />
+        <columnvalue column="PROCESSORDER" number="1" />
+        <columnvalue column="USERDEFINED" boolean="true" />
+        <columnvalue column="CHANGEBY" string="WILSON" />
+        <columnvalue column="CHANGEDATE" date="sysdate" />
+        <columnvalue column="OBJECTID" number="5" />
+        <columnvalue column="HIERARCHYPATH" string="LOCATIONS" />
+        <columnvalue column="EXCLUDEPARENTKEY" boolean="false" />
+        <columnvalue column="DELETEONCREATE" boolean="false" />
+        <columnvalue column="PROPAGATEEVENT" boolean="false" />
+        <columnvalue column="INVOKEEXECUTE" boolean="false" />
+        <columnvalue column="SKIPKEYUPDATE" boolean="false" />
+        <columnvalue column="EXCLUDEBYDEFAULT" boolean="false" />
+        <columnvalue column="SKIPDELETEONREPLACE" boolean="false" />
+      </insertrow>
+    </insert>
+    <insert table="MAXINTOBJDETAIL" ignore_duplicates="true">
+      <insertrow>
+        <columnvalue column="INTOBJECTNAME" string="PLUSZLOCATIONS" />
+        <columnvalue column="OBJECTNAME" string="SERVICEADDRESS" />
+        <columnvalue column="RELATION" string="SERVICEADDRESS" />
+        <columnvalue column="OBJECTORDER" selectnumber="select max(objectorder) + 1 from maxintobjdetail where intobjectname='PLUSZLOCATIONS' and parentobjid = (select objectid from maxintobjdetail where intobjectname='PLUSZLOCATIONS' and hierarchypath='LOCATIONS')" />
+        <columnvalue column="PROCESSORDER" selectnumber="select max(processorder) + 1 from maxintobjdetail where intobjectname='PLUSZLOCATIONS'" />
+        <columnvalue column="USERDEFINED" boolean="true" />
+        <columnvalue column="CHANGEBY" string="WILSON" />
+        <columnvalue column="CHANGEDATE" date="sysdate" />
+        <columnvalue column="OBJECTID" selectnumber="select max(objectid) + 1 from maxintobjdetail where intobjectname='PLUSZLOCATIONS'" />
+        <columnvalue column="PARENTOBJID" selectnumber="select objectid from maxintobjdetail where intobjectname='PLUSZLOCATIONS' and hierarchypath='LOCATIONS'" />
+        <columnvalue column="HIERARCHYPATH" string="LOCATIONS/SERVICEADDRESS" />
+        <columnvalue column="EXCLUDEPARENTKEY" boolean="true" />
+        <columnvalue column="DELETEONCREATE" boolean="true" />
+        <columnvalue column="PROPAGATEEVENT" boolean="true" />
+        <columnvalue column="INVOKEEXECUTE" boolean="false" />
+        <columnvalue column="SKIPKEYUPDATE" boolean="false" />
+        <columnvalue column="EXCLUDEBYDEFAULT" boolean="false" />
+        <columnvalue column="SKIPDELETEONREPLACE" boolean="false" />
+      </insertrow>
+    </insert>
+    <freeform description="MAXINTOBJAPP">
+      <sql target="all">delete from maxintobjapp where intobjectname = 'PLUSZLOCATIONS'</sql>
+    </freeform>
+    <freeform description="MAXINTOBJCOLS">
+      <sql target="all">delete from maxintobjcols where intobjectname = 'PLUSZLOCATIONS'</sql>
+    </freeform>
+    <insert table="MAXINTOBJCOLS" ignore_duplicates="true">
+      <insertrow>
+        <columnvalue column="INTOBJECTNAME" string="PLUSZLOCATIONS" />
+        <columnvalue column="OBJECTNAME" string="LOCATIONS" />
+        <columnvalue column="NAME" string="HASLD" />
+        <columnvalue column="INTOBJFLDTYPE" string="EXCLUDE" />
+        <columnvalue column="CHANGEBY" string="WILSON" />
+        <columnvalue column="CHANGEDATE" date="sysdate" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="INTOBJECTNAME" string="PLUSZLOCATIONS" />
+        <columnvalue column="OBJECTNAME" string="LOCATIONS" />
+        <columnvalue column="NAME" string="LANGCODE" />
+        <columnvalue column="INTOBJFLDTYPE" string="EXCLUDE" />
+        <columnvalue column="CHANGEBY" string="WILSON" />
+        <columnvalue column="CHANGEDATE" date="sysdate" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="INTOBJECTNAME" string="PLUSZLOCATIONS" />
+        <columnvalue column="OBJECTNAME" string="SERVICEADDRESS" />
+        <columnvalue column="NAME" string="HASLD" />
+        <columnvalue column="INTOBJFLDTYPE" string="EXCLUDE" />
+        <columnvalue column="CHANGEBY" string="WILSON" />
+        <columnvalue column="CHANGEDATE" date="sysdate" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="INTOBJECTNAME" string="PLUSZLOCATIONS" />
+        <columnvalue column="OBJECTNAME" string="SERVICEADDRESS" />
+        <columnvalue column="NAME" string="LANGCODE" />
+        <columnvalue column="INTOBJFLDTYPE" string="EXCLUDE" />
+        <columnvalue column="CHANGEBY" string="WILSON" />
+        <columnvalue column="CHANGEDATE" date="sysdate" />
+      </insertrow>
+    </insert>
+    <freeform description="MAXINTOBJALIAS">
+      <sql target="all">delete from maxintobjalias where intobjectname = 'PLUSZLOCATIONS'</sql>
+    </freeform>
+    <insert table="MAXINTOBJALIAS" ignore_duplicates="true">
+      <insertrow>
+        <columnvalue column="INTOBJECTNAME" string="PLUSZLOCATIONS" />
+        <columnvalue column="NAME" string="DESCRIPTION" />
+        <columnvalue column="ALIASNAME" string="DESCRIPTION" />
+        <columnvalue column="OBJECTID" selectnumber="select objectid from maxintobjdetail where intobjectname='PLUSZLOCATIONS' and hierarchypath='LOCATIONS'" />
+        <columnvalue column="HIERARCHYPATH" string="LOCATIONS" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="INTOBJECTNAME" string="PLUSZLOCATIONS" />
+        <columnvalue column="NAME" string="DESCRIPTION" />
+        <columnvalue column="ALIASNAME" string="SA_DESCRIPTION" />
+        <columnvalue column="OBJECTID" selectnumber="select objectid from maxintobjdetail where intobjectname='PLUSZLOCATIONS' and hierarchypath='LOCATIONS/SERVICEADDRESS'" />
+        <columnvalue column="HIERARCHYPATH" string="LOCATIONS/SERVICEADDRESS" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="INTOBJECTNAME" string="PLUSZLOCATIONS" />
+        <columnvalue column="NAME" string="ORGID" />
+        <columnvalue column="ALIASNAME" string="SA_ORGID" />
+        <columnvalue column="OBJECTID" selectnumber="select objectid from maxintobjdetail where intobjectname='PLUSZLOCATIONS' and hierarchypath='LOCATIONS/SERVICEADDRESS'" />
+        <columnvalue column="HIERARCHYPATH" string="LOCATIONS/SERVICEADDRESS" />
+      </insertrow>
+    </insert>
+    <freeform description="OSLCQUERY">
+      <sql target="all">delete from oslcquery where intobjectname = 'PLUSZLOCATIONS'</sql>
+    </freeform>
+    <insert table="OSLCQUERY" ignore_duplicates="true">
+      <insertrow>
+        <columnvalue column="INTOBJECTNAME" string="PLUSZLOCATIONS" />
+        <columnvalue column="CLAUSENAME" string="PLUSZLOCATIONS" />
+        <columnvalue column="ISPUBLIC" boolean="true" />
+        <columnvalue column="OWNER" string="WILSON" />
+        <columnvalue column="CLAUSE" string="location in (select location from locationmeter where metername in (select metername from meteringroup where groupname like 'PLUSZ_%'))" />
+        <columnvalue column="QUERYTYPE" string="osclause" />
+        <columnvalue column="FILTER" boolean="false" />
+        <columnvalue column="LANGCODE" string="EN" />
+      </insertrow>
+    </insert>
+    <freeform description="OSOSLCACTION">
+      <sql target="all">delete from ososlcaction where intobjectname = 'PLUSZLOCATIONS'</sql>
+    </freeform>
+    <freeform description="MAXAPPS">
+      <sql target="all">delete from maxapps where app = 'PLUSZLOCATIONS'</sql>
+    </freeform>
+    <freeform description="MAXINTOBJECT">
+      <sql target="all">delete from maxintobject where intobjectname = 'PLUSZLOCMETERREADING'</sql>
+    </freeform>
+    <insert table="MAXINTOBJECT" ignore_duplicates="true">
+      <insertrow>
+        <columnvalue column="INTOBJECTNAME" string="PLUSZLOCMETERREADING" />
+        <columnvalue column="DESCRIPTION" string="Location Meter Readings for Envizi integration." />
+        <columnvalue column="SELFREFERENCING" boolean="false" />
+        <columnvalue column="USERDEFINED" boolean="true" />
+        <columnvalue column="CHANGEBY" string="WILSON" />
+        <columnvalue column="CHANGEDATE" date="sysdate" />
+        <columnvalue column="LANGCODE" string="EN" />
+        <columnvalue column="HASLD" boolean="false" />
+        <columnvalue column="QUERYONLY" boolean="true" />
+        <columnvalue column="CONFIGURABLE" boolean="true" />
+        <columnvalue column="FLATSUPPORTED" boolean="true" />
+        <columnvalue column="USEWITH" string="INTEGRATION" />
+        <columnvalue column="ALIASCONFLICT" boolean="false" />
+        <columnvalue column="LOADQUERYFROMAPP" boolean="false" />
+        <columnvalue column="AUTOPAGINGTHRESHOLD" number="-1" />
+        <columnvalue column="TIMELINEATTRIBUTE" string="-1" />
+        <columnvalue column="PRIMARYAPI" boolean="false" />
+      </insertrow>
+    </insert>
+    <freeform description="MAXINTOBJDETAIL">
+      <sql target="all">delete from maxintobjdetail where intobjectname = 'PLUSZLOCMETERREADING'</sql>
+    </freeform>
+    <insert table="MAXINTOBJDETAIL" ignore_duplicates="true">
+      <insertrow>
+        <columnvalue column="INTOBJECTNAME" string="PLUSZLOCMETERREADING" />
+        <columnvalue column="OBJECTNAME" string="LOCMETERREADING" />
+        <columnvalue column="OBJECTORDER" number="1" />
+        <columnvalue column="PROCESSORDER" number="1" />
+        <columnvalue column="USERDEFINED" boolean="true" />
+        <columnvalue column="CHANGEBY" string="WILSON" />
+        <columnvalue column="CHANGEDATE" date="sysdate" />
+        <columnvalue column="OBJECTID" number="1" />
+        <columnvalue column="HIERARCHYPATH" string="LOCMETERREADING" />
+        <columnvalue column="EXCLUDEPARENTKEY" boolean="false" />
+        <columnvalue column="DELETEONCREATE" boolean="false" />
+        <columnvalue column="PROPAGATEEVENT" boolean="false" />
+        <columnvalue column="INVOKEEXECUTE" boolean="false" />
+        <columnvalue column="SKIPKEYUPDATE" boolean="false" />
+        <columnvalue column="EXCLUDEBYDEFAULT" boolean="false" />
+        <columnvalue column="SKIPDELETEONREPLACE" boolean="false" />
+      </insertrow>
+    </insert>
+    <freeform description="MAXINTOBJAPP">
+      <sql target="all">delete from maxintobjapp where intobjectname = 'PLUSZLOCMETERREADING'</sql>
+    </freeform>
+    <freeform description="MAXINTOBJCOLS">
+      <sql target="all">delete from maxintobjcols where intobjectname = 'PLUSZLOCMETERREADING'</sql>
+    </freeform>
+    <freeform description="MAXINTOBJALIAS">
+      <sql target="all">delete from maxintobjalias where intobjectname = 'PLUSZLOCMETERREADING'</sql>
+    </freeform>
+    <freeform description="OSLCQUERY">
+      <sql target="all">delete from oslcquery where intobjectname = 'PLUSZLOCMETERREADING'</sql>
+    </freeform>
+    <insert table="OSLCQUERY" ignore_duplicates="true">
+      <insertrow>
+        <columnvalue column="INTOBJECTNAME" string="PLUSZLOCMETERREADING" />
+        <columnvalue column="CLAUSENAME" string="PLUSZLOCMETERREADING" />
+        <columnvalue column="DESCRIPTION" string="LOCATION METER READINGS" />
+        <columnvalue column="ISPUBLIC" boolean="true" />
+        <columnvalue column="OWNER" string="WILSON" />
+        <columnvalue column="CLAUSE" string="metername in (select metername from meteringroup where groupname like 'PLUSZ_%') and measureunitid != ''" />
+        <columnvalue column="QUERYTYPE" string="osclause" />
+        <columnvalue column="FILTER" boolean="false" />
+        <columnvalue column="LANGCODE" string="EN" />
+      </insertrow>
+    </insert>
+    <freeform description="OSOSLCACTION">
+      <sql target="all">delete from ososlcaction where intobjectname = 'PLUSZLOCMETERREADING'</sql>
+    </freeform>
+    <freeform description="MAXAPPS">
+      <sql target="all">delete from maxapps where app = 'PLUSZLOCMETERREADING'</sql>
+    </freeform>
+  
+  
+    <create_relationship parent="LOCMETERREADING" name="PLUSZMETERINGROUP" child="METERINGROUP" whereclause="groupname like 'PLUSZ_%' and metername = :metername" remarks="Relationship to METERINGROUP to retrieve the groupname for the Envizi meter." />
+  
+
+  
+    <freeform description="CRONTASKDEF">
+      <sql target="all">delete from crontaskdef where crontaskname='PLUSZEXPORT'</sql>
+    </freeform>
+    <insert table="CRONTASKDEF" ignore_duplicates="true">
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="CLASSNAME" string="psdi.plusz.iface.cron.PLUSZEXPORT" />
+        <columnvalue column="DESCRIPTION" string="Export Data to ENVIZI" />
+        <columnvalue column="ACCESSLEVEL" string="FULL" />
+        <columnvalue column="LANGCODE" string="EN" />
+        <columnvalue column="HASLD" boolean="false" />
+      </insertrow>
+    </insert>
+    <freeform description="CRONTASKINSTANCE">
+      <sql target="all">delete from crontaskinstance where crontaskname='PLUSZEXPORT'</sql>
+    </freeform>
+    <insert table="CRONTASKINSTANCE" ignore_duplicates="true">
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCATIONS_ALWAYS_ON" />
+        <columnvalue column="RELOADREQTIME" date="sysdate" />
+        <columnvalue column="SCHEDULE" string="1M,0,0,0,1,*,*,*,*,*" />
+        <columnvalue column="ACTIVE" boolean="false" />
+        <columnvalue column="DESCRIPTION" string="Export Data to ENVIZI" />
+        <columnvalue column="RUNASUSERID" string="MAXADMIN" />
+        <columnvalue column="LANGCODE" string="EN" />
+        <columnvalue column="HASLD" boolean="false" />
+        <columnvalue column="AUTOREMOVAL" boolean="false" />
+        <columnvalue column="KEEPHISTORY" boolean="true" />
+        <columnvalue column="MAXHISTORY" number="1000" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCMETERREADING_ALWAYS_ON" />
+        <columnvalue column="RELOADREQTIME" date="sysdate" />
+        <columnvalue column="SCHEDULE" string="1M,0,0,0,1,*,*,*,*,*" />
+        <columnvalue column="ACTIVE" boolean="false" />
+        <columnvalue column="DESCRIPTION" string="Export Data to ENVIZI" />
+        <columnvalue column="RUNASUSERID" string="MAXADMIN" />
+        <columnvalue column="LANGCODE" string="EN" />
+        <columnvalue column="HASLD" boolean="false" />
+        <columnvalue column="AUTOREMOVAL" boolean="false" />
+        <columnvalue column="KEEPHISTORY" boolean="true" />
+        <columnvalue column="MAXHISTORY" number="1000" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCATIONS_ON_DEMAND" />
+        <columnvalue column="RELOADREQTIME" date="sysdate" />
+        <columnvalue column="SCHEDULE" string="1y,0,0,0,1,0,*,*,*,*" />
+        <columnvalue column="ACTIVE" boolean="false" />
+        <columnvalue column="DESCRIPTION" string="Export Data to ENVIZI" />
+        <columnvalue column="RUNASUSERID" string="MAXADMIN" />
+        <columnvalue column="LANGCODE" string="EN" />
+        <columnvalue column="HASLD" boolean="false" />
+        <columnvalue column="AUTOREMOVAL" boolean="false" />
+        <columnvalue column="KEEPHISTORY" boolean="true" />
+        <columnvalue column="MAXHISTORY" number="100" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCMETERREADING_ON_DEMAND" />
+        <columnvalue column="RELOADREQTIME" date="sysdate" />
+        <columnvalue column="SCHEDULE" string="1y,0,0,0,1,0,*,*,*,*" />
+        <columnvalue column="ACTIVE" boolean="false" />
+        <columnvalue column="DESCRIPTION" string="Export Data to ENVIZI" />
+        <columnvalue column="RUNASUSERID" string="MAXADMIN" />
+        <columnvalue column="LANGCODE" string="EN" />
+        <columnvalue column="HASLD" boolean="false" />
+        <columnvalue column="AUTOREMOVAL" boolean="false" />
+        <columnvalue column="KEEPHISTORY" boolean="true" />
+        <columnvalue column="MAXHISTORY" number="100" />
+      </insertrow>
+    </insert>
+    <freeform description="CRONTASKPARAM">
+      <sql target="all">delete from crontaskparam where crontaskname='PLUSZEXPORT'</sql>
+    </freeform>
+    <insert table="CRONTASKPARAM" ignore_duplicates="true">
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCATIONS_ALWAYS_ON" />
+        <columnvalue column="PARAMETER" string="CUSTOMER" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCATIONS_ALWAYS_ON" />
+        <columnvalue column="PARAMETER" string="ENDPOINTNAME" />
+        <columnvalue column="VALUE" string="PLUSZEXPORT" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCATIONS_ALWAYS_ON" />
+        <columnvalue column="PARAMETER" string="FROM" />
+        <columnvalue column="VALUE" string="PLUSZLOCATIONS" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCATIONS_ALWAYS_ON" />
+        <columnvalue column="PARAMETER" string="MXURL" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCATIONS_ALWAYS_ON" />
+        <columnvalue column="PARAMETER" string="ORDERBY" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCATIONS_ALWAYS_ON" />
+        <columnvalue column="PARAMETER" string="OVERRIDEENDDATE" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCATIONS_ALWAYS_ON" />
+        <columnvalue column="PARAMETER" string="OVERRIDESTARTDATE" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCATIONS_ALWAYS_ON" />
+        <columnvalue column="PARAMETER" string="PAGESIZE" />
+        <columnvalue column="VALUE" string="100" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCATIONS_ALWAYS_ON" />
+        <columnvalue column="PARAMETER" string="SAVEDQUERY" />
+        <columnvalue column="VALUE" string="PLUSZLOCATIONS" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCATIONS_ALWAYS_ON" />
+        <columnvalue column="PARAMETER" string="SELECT" />
+        <columnvalue column="VALUE" string="orgid,siteid,location,description,status,statusdate,serviceaddress{streetaddress,addressline2,addressline3,city,stateprovince,postalcode,country,latitudey,longitudex}" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCATIONS_ALWAYS_ON" />
+        <columnvalue column="PARAMETER" string="TARGETDATECOLUMN" />
+        <columnvalue column="VALUE" string="changedate" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCATIONS_ALWAYS_ON" />
+        <columnvalue column="PARAMETER" string="WHERE" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCATIONS_ON_DEMAND" />
+        <columnvalue column="PARAMETER" string="CUSTOMER" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCATIONS_ON_DEMAND" />
+        <columnvalue column="PARAMETER" string="ENDPOINTNAME" />
+        <columnvalue column="VALUE" string="PLUSZEXPORT" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCATIONS_ON_DEMAND" />
+        <columnvalue column="PARAMETER" string="FROM" />
+        <columnvalue column="VALUE" string="PLUSZLOCATIONS" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCATIONS_ON_DEMAND" />
+        <columnvalue column="PARAMETER" string="MXURL" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCATIONS_ON_DEMAND" />
+        <columnvalue column="PARAMETER" string="ORDERBY" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCATIONS_ON_DEMAND" />
+        <columnvalue column="PARAMETER" string="OVERRIDEENDDATE" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCATIONS_ON_DEMAND" />
+        <columnvalue column="PARAMETER" string="OVERRIDESTARTDATE" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCATIONS_ON_DEMAND" />
+        <columnvalue column="PARAMETER" string="PAGESIZE" />
+        <columnvalue column="VALUE" string="100" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCATIONS_ON_DEMAND" />
+        <columnvalue column="PARAMETER" string="SAVEDQUERY" />
+        <columnvalue column="VALUE" string="PLUSZLOCATIONS" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCATIONS_ON_DEMAND" />
+        <columnvalue column="PARAMETER" string="SELECT" />
+        <columnvalue column="VALUE" string="orgid,siteid,location,description,status,statusdate,serviceaddress{streetaddress,addressline2,addressline3,city,stateprovince,postalcode,country,latitudey,longitudex}" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCATIONS_ON_DEMAND" />
+        <columnvalue column="PARAMETER" string="TARGETDATECOLUMN" />
+        <columnvalue column="VALUE" string="changedate" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCATIONS_ON_DEMAND" />
+        <columnvalue column="PARAMETER" string="WHERE" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCMETERREADING_ALWAYS_ON" />
+        <columnvalue column="PARAMETER" string="CUSTOMER" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCMETERREADING_ALWAYS_ON" />
+        <columnvalue column="PARAMETER" string="ENDPOINTNAME" />
+        <columnvalue column="VALUE" string="PLUSZEXPORT" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCMETERREADING_ALWAYS_ON" />
+        <columnvalue column="PARAMETER" string="FROM" />
+        <columnvalue column="VALUE" string="PLUSZLOCMETERREADING" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCMETERREADING_ALWAYS_ON" />
+        <columnvalue column="PARAMETER" string="MXURL" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCMETERREADING_ALWAYS_ON" />
+        <columnvalue column="PARAMETER" string="ORDERBY" />
+        <columnvalue column="VALUE" string="+orgid,+siteid,+location,+metername,+readingdate" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCMETERREADING_ALWAYS_ON" />
+        <columnvalue column="PARAMETER" string="OVERRIDEENDDATE" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCMETERREADING_ALWAYS_ON" />
+        <columnvalue column="PARAMETER" string="OVERRIDESTARTDATE" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCMETERREADING_ALWAYS_ON" />
+        <columnvalue column="PARAMETER" string="PAGESIZE" />
+        <columnvalue column="VALUE" string="100" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCMETERREADING_ALWAYS_ON" />
+        <columnvalue column="PARAMETER" string="SAVEDQUERY" />
+        <columnvalue column="VALUE" string="PLUSZLOCMETERREADING" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCMETERREADING_ALWAYS_ON" />
+        <columnvalue column="PARAMETER" string="SELECT" />
+        <columnvalue column="VALUE" string="orgid,siteid,location,metername,reading,measureunitid,readingdate,enterdate,rollover,didrollover,locationmeter.locationmeterid,pluszmeteringroup.groupname" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCMETERREADING_ALWAYS_ON" />
+        <columnvalue column="PARAMETER" string="TARGETDATECOLUMN" />
+        <columnvalue column="VALUE" string="readingdate" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCMETERREADING_ALWAYS_ON" />
+        <columnvalue column="PARAMETER" string="WHERE" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCMETERREADING_ON_DEMAND" />
+        <columnvalue column="PARAMETER" string="CUSTOMER" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCMETERREADING_ON_DEMAND" />
+        <columnvalue column="PARAMETER" string="ENDPOINTNAME" />
+        <columnvalue column="VALUE" string="PLUSZEXPORT" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCMETERREADING_ON_DEMAND" />
+        <columnvalue column="PARAMETER" string="FROM" />
+        <columnvalue column="VALUE" string="PLUSZLOCMETERREADING" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCMETERREADING_ON_DEMAND" />
+        <columnvalue column="PARAMETER" string="MXURL" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCMETERREADING_ON_DEMAND" />
+        <columnvalue column="PARAMETER" string="ORDERBY" />
+        <columnvalue column="VALUE" string="+orgid,+siteid,+location,+metername,+readingdate" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCMETERREADING_ON_DEMAND" />
+        <columnvalue column="PARAMETER" string="OVERRIDEENDDATE" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCMETERREADING_ON_DEMAND" />
+        <columnvalue column="PARAMETER" string="OVERRIDESTARTDATE" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCMETERREADING_ON_DEMAND" />
+        <columnvalue column="PARAMETER" string="PAGESIZE" />
+        <columnvalue column="VALUE" string="100" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCMETERREADING_ON_DEMAND" />
+        <columnvalue column="PARAMETER" string="SAVEDQUERY" />
+        <columnvalue column="VALUE" string="PLUSZLOCMETERREADING" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCMETERREADING_ON_DEMAND" />
+        <columnvalue column="PARAMETER" string="SELECT" />
+        <columnvalue column="VALUE" string="orgid,siteid,location,metername,reading,measureunitid,readingdate,enterdate,rollover,didrollover,locationmeter.locationmeterid,pluszmeteringroup.groupname" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCMETERREADING_ON_DEMAND" />
+        <columnvalue column="PARAMETER" string="TARGETDATECOLUMN" />
+        <columnvalue column="VALUE" string="readingdate" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="CRONTASKNAME" string="PLUSZEXPORT" />
+        <columnvalue column="INSTANCENAME" string="PLUSZLOCMETERREADING_ON_DEMAND" />
+        <columnvalue column="PARAMETER" string="WHERE" />
+      </insertrow>
+    </insert>
+
+
+    <freeform description="MAXMESSAGES">
+      <sql target="all">delete from maxmessages where msggroup='PLUSZ'</sql>
+    </freeform>
+    <insert table="MAXMESSAGES" ignore_duplicates="true">
+      <insertrow>
+        <columnvalue column="MSGKEY" string="CronParamCustomer" />
+        <columnvalue column="MSGGROUP" string="PLUSZ" />
+        <columnvalue column="VALUE" string="To be provided by Envizi" />
+        <columnvalue column="DISPLAYMETHOD" string="TEXT" />
+        <columnvalue column="OPTIONS" number="0" />
+        <columnvalue column="MSGID" string="BMXZZ7126I" />
+        <columnvalue column="PREFIX" boolean="true" />
+        <columnvalue column="OVERLAIDMSG" boolean="false" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="MSGKEY" string="CronParamEndpointName" />
+        <columnvalue column="MSGGROUP" string="PLUSZ" />
+        <columnvalue column="VALUE" string="Do not change without consulting Envizi. Name of Maximo End Point that connects to AppConnect flow." />
+        <columnvalue column="DISPLAYMETHOD" string="TEXT" />
+        <columnvalue column="OPTIONS" number="0" />
+        <columnvalue column="MSGID" string="BMXZZ7130I" />
+        <columnvalue column="PREFIX" boolean="true" />
+        <columnvalue column="OVERLAIDMSG" boolean="false" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="MSGKEY" string="CronParamFrom" />
+        <columnvalue column="MSGGROUP" string="PLUSZ" />
+        <columnvalue column="VALUE" string="Do not change without consulting Envizi. Name of Object Structure." />
+        <columnvalue column="DISPLAYMETHOD" string="TEXT" />
+        <columnvalue column="OPTIONS" number="0" />
+        <columnvalue column="MSGID" string="BMXZZ7120I" />
+        <columnvalue column="PREFIX" boolean="true" />
+        <columnvalue column="OVERLAIDMSG" boolean="false" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="MSGKEY" string="CronParamMxUrl" />
+        <columnvalue column="MSGGROUP" string="PLUSZ" />
+        <columnvalue column="VALUE" string="Your maximo URL eg., https://maximo.example.com:9080" />
+        <columnvalue column="DISPLAYMETHOD" string="TEXT" />
+        <columnvalue column="OPTIONS" number="0" />
+        <columnvalue column="MSGID" string="BMXZZ7129I" />
+        <columnvalue column="PREFIX" boolean="true" />
+        <columnvalue column="OVERLAIDMSG" boolean="false" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="MSGKEY" string="CronParamOrderBy" />
+        <columnvalue column="MSGGROUP" string="PLUSZ" />
+        <columnvalue column="VALUE" string="Do not change without consulting Envizi. Sequence of records." />
+        <columnvalue column="DISPLAYMETHOD" string="TEXT" />
+        <columnvalue column="OPTIONS" number="0" />
+        <columnvalue column="MSGID" string="BMXZZ7124I" />
+        <columnvalue column="PREFIX" boolean="true" />
+        <columnvalue column="OVERLAIDMSG" boolean="false" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="MSGKEY" string="CronParamOverrideEndDate" />
+        <columnvalue column="MSGGROUP" string="PLUSZ" />
+        <columnvalue column="VALUE" string="The end timestamp (ISO 8601 Format) of the window between which the data will be pulled from. Only for On-demand cron. eg., 2022-06-26T23:07:30-07:00 where -07:00 represents timezone offset of UTC - 7 hours" />
+        <columnvalue column="DISPLAYMETHOD" string="TEXT" />
+        <columnvalue column="OPTIONS" number="0" />
+        <columnvalue column="MSGID" string="BMXZZ7128I" />
+        <columnvalue column="PREFIX" boolean="true" />
+        <columnvalue column="OVERLAIDMSG" boolean="false" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="MSGKEY" string="CronParamOverrideStartDate" />
+        <columnvalue column="MSGGROUP" string="PLUSZ" />
+        <columnvalue column="VALUE" string="The start timestamp (ISO 8601 Format) of the window between which the data will be pulled from. Only for On-demand cron. eg., 2022-06-26T23:07:30-07:00 where -07:00 represents timezone offset of UTC - 7 hours" />
+        <columnvalue column="DISPLAYMETHOD" string="TEXT" />
+        <columnvalue column="OPTIONS" number="0" />
+        <columnvalue column="MSGID" string="BMXZZ7127I" />
+        <columnvalue column="PREFIX" boolean="true" />
+        <columnvalue column="OVERLAIDMSG" boolean="false" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="MSGKEY" string="CronParamPageSize" />
+        <columnvalue column="MSGGROUP" string="PLUSZ" />
+        <columnvalue column="VALUE" string="Do not change without consulting Envizi. Number of records per file." />
+        <columnvalue column="DISPLAYMETHOD" string="TEXT" />
+        <columnvalue column="OPTIONS" number="0" />
+        <columnvalue column="MSGID" string="BMXZZ7125I" />
+        <columnvalue column="PREFIX" boolean="true" />
+        <columnvalue column="OVERLAIDMSG" boolean="false" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="MSGKEY" string="CronParamSavedQuery" />
+        <columnvalue column="MSGGROUP" string="PLUSZ" />
+        <columnvalue column="VALUE" string="Do not change without consulting Envizi. Maximo Saved Query." />
+        <columnvalue column="DISPLAYMETHOD" string="TEXT" />
+        <columnvalue column="OPTIONS" number="0" />
+        <columnvalue column="MSGID" string="BMXZZ7131I" />
+        <columnvalue column="PREFIX" boolean="true" />
+        <columnvalue column="OVERLAIDMSG" boolean="false" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="MSGKEY" string="CronParamSelect" />
+        <columnvalue column="MSGGROUP" string="PLUSZ" />
+        <columnvalue column="VALUE" string="Do not change without consulting Envizi. Columns exported from Object Structure.." />
+        <columnvalue column="DISPLAYMETHOD" string="TEXT" />
+        <columnvalue column="OPTIONS" number="0" />
+        <columnvalue column="MSGID" string="BMXZZ7121I" />
+        <columnvalue column="PREFIX" boolean="true" />
+        <columnvalue column="OVERLAIDMSG" boolean="false" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="MSGKEY" string="CronParamTargetDateColumn" />
+        <columnvalue column="MSGGROUP" string="PLUSZ" />
+        <columnvalue column="VALUE" string="Do not change without consulting Envizi. Date column from Object Structure used to target records between two timestamps." />
+        <columnvalue column="DISPLAYMETHOD" string="TEXT" />
+        <columnvalue column="OPTIONS" number="0" />
+        <columnvalue column="MSGID" string="BMXZZ7123I" />
+        <columnvalue column="PREFIX" boolean="true" />
+        <columnvalue column="OVERLAIDMSG" boolean="false" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="MSGKEY" string="CronParamWhere" />
+        <columnvalue column="MSGGROUP" string="PLUSZ" />
+        <columnvalue column="VALUE" string="Do not change without consulting Envizi. OSLC where clause." />
+        <columnvalue column="DISPLAYMETHOD" string="TEXT" />
+        <columnvalue column="OPTIONS" number="0" />
+        <columnvalue column="MSGID" string="BMXZZ7122I" />
+        <columnvalue column="PREFIX" boolean="true" />
+        <columnvalue column="OVERLAIDMSG" boolean="false" />
+      </insertrow>
+    </insert>
+  
+  
+    <freeform description="METERGROUP">
+      <sql target="all">delete from metergroup where groupname like 'PLUSZ_%'</sql>
+    </freeform>
+    <insert table="METERGROUP" ignore_duplicates="true">
+      <insertrow>
+        <columnvalue column="GROUPNAME" string="PLUSZ_ELEC" />
+        <columnvalue column="DESCRIPTION" string="Electricity meters for Envizi integration." />
+        <columnvalue column="LANGCODE" string="EN" />
+        <columnvalue column="HASLD" boolean="false" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="GROUPNAME" string="PLUSZ_GAS" />
+        <columnvalue column="DESCRIPTION" string="Gas meters for Envizi integration." />
+        <columnvalue column="LANGCODE" string="EN" />
+        <columnvalue column="HASLD" boolean="false" />
+      </insertrow>
+      <insertrow>
+        <columnvalue column="GROUPNAME" string="PLUSZ_WTR" />
+        <columnvalue column="DESCRIPTION" string="Water meters for Envizi integration." />
+        <columnvalue column="LANGCODE" string="EN" />
+        <columnvalue column="HASLD" boolean="false" />
+      </insertrow>
+    </insert>
+  
+
+
+  </statements>
+
+</script>
+

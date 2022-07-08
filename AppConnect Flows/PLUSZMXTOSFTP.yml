@@ -1,0 +1,747 @@
+$integration: http://ibm.com/appconnect/integration/v2/integrationFile
+integration:
+  type: api
+  trigger-interfaces:
+    trigger-interface-1:
+      triggers:
+        extractMxdata:
+          assembly:
+            $ref: '#/integration/assemblies/assembly-1'
+          input-context:
+            data: query
+          output-context:
+            data: mxdata
+      options:
+        resources:
+          - business-object: mxdata
+            model:
+              $ref: '#/models/mxdata'
+            triggers:
+              extract: extractMxdata
+          - business-object: query
+            model:
+              $ref: '#/models/query'
+            triggers: {}
+      type: api-trigger
+  action-interfaces:
+    action-interface-1:
+      type: api-action
+      business-object: request
+      connector-type: http
+      account-name: Maximo
+      actions:
+        INVOKE: {}
+    action-interface-4:
+      type: api-action
+      business-object: request
+      connector-type: http
+      account-name: Maximo
+      actions:
+        INVOKE: {}
+    action-interface-8:
+      type: api-action
+      business-object: file
+      connector-type: sftp
+      account-name: Envizi
+      actions:
+        CREATE: {}
+  assemblies:
+    assembly-1:
+      assembly:
+        execute:
+          - if:
+              name: If
+              input:
+                - variable: Request
+                  $ref: '#/trigger/payload'
+                - variable: flowDetails
+                  $ref: '#/flowDetails'
+              branch:
+                - condition:
+                    '{{$Request.mxRequest.FROM}}':
+                      '=': ''
+                  execute: []
+                  completion-action:
+                    terminate:
+                      error:
+                        input:
+                          - variable: Request
+                            $ref: '#/trigger/payload'
+                          - variable: flowDetails
+                            $ref: '#/flowDetails'
+                        message: >-
+                          Must specify the [FROM] parameter as a valid Maximo
+                          object structure.
+                        status-code: 400
+                - condition:
+                    '{{$Request.mxRequest.CUSTOMER}}':
+                      '=': ''
+                  execute: []
+                  completion-action:
+                    terminate:
+                      error:
+                        input:
+                          - variable: Request
+                            $ref: '#/trigger/payload'
+                          - variable: flowDetails
+                            $ref: '#/flowDetails'
+                        message: Must specify the [CUSTOMER] parameter
+                        status-code: 400
+                - condition:
+                    '{{$Request.mxRequest.TARGETDATECOLUMN}}':
+                      '=': ''
+                  execute: []
+                  completion-action:
+                    terminate:
+                      error:
+                        input:
+                          - variable: Request
+                            $ref: '#/trigger/payload'
+                          - variable: flowDetails
+                            $ref: '#/flowDetails'
+                        message: Must specify  [TARGETDATECOLUMN] parameter
+                        status-code: 400
+                - condition:
+                    '{{$Request.mxRequest.MXURL}}':
+                      '=': ''
+                  execute: []
+                  completion-action:
+                    terminate:
+                      error:
+                        input:
+                          - variable: Request
+                            $ref: '#/trigger/payload'
+                          - variable: flowDetails
+                            $ref: '#/flowDetails'
+                        message: Must specify the [MXURL] parameter
+                        status-code: 400
+              else:
+                execute: []
+              output-schema: {}
+          - if:
+              name: If 3
+              input:
+                - variable: Request
+                  $ref: '#/trigger/payload'
+                - variable: flowDetails
+                  $ref: '#/flowDetails'
+              branch:
+                - condition:
+                    and:
+                      - '{{$Request.mxRequest.OVERRIDESTARTDATE}}':
+                          neq: ''
+                      - '{{$Request.mxRequest.OVERRIDEENDDATE}}':
+                          neq: ''
+                      - '{{$toMillis($Request.mxRequest.OVERRIDESTARTDATE)}}':
+                          gt: '0'
+                      - '{{$toMillis($Request.mxRequest.OVERRIDEENDDATE)}}':
+                          gt: '0'
+                  execute: []
+                  map:
+                    $map: http://ibm.com/appconnect/map/v1
+                    input:
+                      - variable: Request
+                        $ref: '#/trigger/payload'
+                      - variable: flowDetails
+                        $ref: '#/flowDetails'
+                    mappings:
+                      - dateQuery:
+                          template: >-
+                            {{$Request.mxRequest.TARGETDATECOLUMN}}>="{{$Request.mxRequest.OVERRIDESTARTDATE}}"
+                            AND
+                            {{$Request.mxRequest.TARGETDATECOLUMN}}<="{{$Request.mxRequest.OVERRIDEENDDATE}}"
+                - condition:
+                    '{{$Request.mxRequest.LASTSTARTDATE}}':
+                      neq: ''
+                  execute: []
+                  map:
+                    $map: http://ibm.com/appconnect/map/v1
+                    input:
+                      - variable: Request
+                        $ref: '#/trigger/payload'
+                      - variable: flowDetails
+                        $ref: '#/flowDetails'
+                    mappings:
+                      - dateQuery:
+                          template: >-
+                            {{$Request.mxRequest.TARGETDATECOLUMN}}>="{{$Request.mxRequest.LASTSTARTDATE}}"
+              else:
+                execute: []
+                completion-action:
+                  terminate:
+                    error:
+                      input:
+                        - variable: Request
+                          $ref: '#/trigger/payload'
+                        - variable: flowDetails
+                          $ref: '#/flowDetails'
+                      message: Incorrect Dates supplied
+                      status-code: 400
+              output-schema:
+                type: object
+                properties:
+                  dateQuery:
+                    type: string
+                required: []
+          - set-variable:
+              name: Set variable 5
+              map:
+                $map: http://ibm.com/appconnect/map/v1
+                customSchemas:
+                  properties.`variable`:
+                    type: object
+                    properties:
+                      where:
+                        type: string
+                      batchTimestamp:
+                        type: string
+                input:
+                  - variable: Request
+                    $ref: '#/trigger/payload'
+                  - variable: If3
+                    $ref: '#/node-output/If 3/response/payload'
+                  - variable: flowDetails
+                    $ref: '#/flowDetails'
+                mappings:
+                  - variable:
+                      mappings:
+                        - batchTimestamp:
+                            template: '{{$millis()}}'
+                        - where:
+                            template: >-
+                              &oslc.where={{$encodeUrlComponent($Request.mxRequest.WHERE
+                              ? $Request.mxRequest.WHERE & " AND " &
+                              $If3.dateQuery : $If3.dateQuery ) }}
+          - set-variable:
+              name: Set variable
+              map:
+                $map: http://ibm.com/appconnect/map/v1
+                customSchemas:
+                  properties.`variable`:
+                    type: object
+                    properties:
+                      pageSize:
+                        type: number
+                      query:
+                        type: string
+                input:
+                  - variable: Request
+                    $ref: '#/trigger/payload'
+                  - variable: If3
+                    $ref: '#/node-output/If 3/response/payload'
+                  - variable: Setvariable5
+                    $ref: '#/node-output/Set variable 5/response/payload'
+                  - variable: flowDetails
+                    $ref: '#/flowDetails'
+                mappings:
+                  - variable:
+                      mappings:
+                        - pageSize:
+                            expression: >-
+                              $boolean($Request.mxRequest.PAGESIZE) ?
+                              $number($Request.mxRequest.PAGESIZE) : 100
+                        - query:
+                            template: >-
+                              {{(    /* build query parameters, remove empty or
+                              nulls */    $select :=
+                              $boolean($Request.mxRequest.SELECT) ?
+                              "&oslc.select=" &
+                              $encodeUrlComponent($Request.mxRequest.SELECT);       
+                              $orderby := $boolean($Request.mxRequest.ORDERBY) ?
+                              "&oslc.orderBy="&
+                              $encodeUrlComponent($Request.mxRequest.ORDERBY);   
+                              $pagesize := $boolean($Request.mxRequest.PAGESIZE)
+                              ? "&oslc.pageSize="& $Request.mxRequest.PAGESIZE :
+                              "&oslc.pageSize=100"; /* default to 100 if no
+                              pageSize is given */    $savedQuery :=
+                              $boolean($Request.mxRequest.SAVEDQUERY) ?
+                              "&savedQuery=" &
+                              $encodeUrlComponent($Request.mxRequest.SAVEDQUERY);   
+                              $params := $select & $Setvariable5.variable.where
+                              & $orderby & $pagesize & $savedQuery & "&lean=1"; 
+                              $substringAfter($params, "&");  /* elminate first
+                              ampersand */)}}
+          - custom-action:
+              name: HTTP Invoke method
+              target:
+                $ref: '#/integration/action-interfaces/action-interface-1'
+              action: INVOKE
+              map:
+                mappings:
+                  - continue2xx:
+                      expression: 'false'
+                  - method:
+                      template: GET
+                  - url:
+                      template: >-
+                        {{$Request.mxRequest.MXURL}}/maximo/api/os/{{$Request.mxRequest.FROM}}?{{$Setvariable.variable.query}}&count=1
+                $map: http://ibm.com/appconnect/map/v1
+                input:
+                  - variable: Request
+                    $ref: '#/trigger/payload'
+                  - variable: If3
+                    $ref: '#/node-output/If 3/response/payload'
+                  - variable: dBasketPOST
+                    $ref: '#/node-output/dBasket POST/response/payload'
+                  - variable: dBasketPOSTMetadata
+                    $ref: '#/node-output/dBasket POST/response'
+                  - variable: Setvariable5
+                    $ref: '#/node-output/Set variable 5/response/payload'
+                  - variable: Setvariable
+                    $ref: '#/node-output/Set variable/response/payload'
+                  - variable: flowDetails
+                    $ref: '#/flowDetails'
+          - set-variable:
+              name: Set variable 2
+              map:
+                $map: http://ibm.com/appconnect/map/v1
+                customSchemas:
+                  properties.`variable`:
+                    type: object
+                    properties:
+                      totalCount:
+                        type: number
+                input:
+                  - variable: api
+                    $ref: '#/trigger/api/parameters'
+                  - variable: Setvariable
+                    $ref: '#/node-output/Set variable/response/payload'
+                  - variable: testClienttestclient2
+                    $ref: '#/node-output/testClient testclient 2/response/payload'
+                  - variable: testClienttestclient2Metadata
+                    $ref: '#/node-output/testClient testclient 2/response'
+                  - variable: HTTPInvokemethod
+                    $ref: '#/node-output/HTTP Invoke method/response/payload'
+                  - variable: HTTPInvokemethodMetadata
+                    $ref: '#/node-output/HTTP Invoke method/response'
+                mappings:
+                  - variable:
+                      mappings:
+                        - totalCount:
+                            expression: >-
+                              $number($eval($HTTPInvokemethod.responseBody).totalCount)
+          - set-variable:
+              name: Set variable 3
+              map:
+                $map: http://ibm.com/appconnect/map/v1
+                customSchemas:
+                  properties.`variable`:
+                    type: object
+                    properties:
+                      totalPages:
+                        type: number
+                input:
+                  - variable: api
+                    $ref: '#/trigger/api/parameters'
+                  - variable: Setvariable
+                    $ref: '#/node-output/Set variable/response/payload'
+                  - variable: testClienttestclient2
+                    $ref: '#/node-output/testClient testclient 2/response/payload'
+                  - variable: testClienttestclient2Metadata
+                    $ref: '#/node-output/testClient testclient 2/response'
+                  - variable: HTTPInvokemethod
+                    $ref: '#/node-output/HTTP Invoke method/response/payload'
+                  - variable: HTTPInvokemethodMetadata
+                    $ref: '#/node-output/HTTP Invoke method/response'
+                  - variable: Setvariable2
+                    $ref: '#/node-output/Set variable 2/response/payload'
+                mappings:
+                  - variable:
+                      mappings:
+                        - totalPages:
+                            expression: >-
+                              $ceil($Setvariable2.variable.totalCount /
+                              $Setvariable.variable.pageSize)
+          - for-each:
+              name: For each
+              assembly:
+                $ref: '#/integration/assemblies/assembly-2'
+              source:
+                expression: '[1..$Setvariable3.variable.totalPages]'
+                input:
+                  - variable: Request
+                    $ref: '#/trigger/payload'
+                  - variable: If3
+                    $ref: '#/node-output/If 3/response/payload'
+                  - variable: Setvariable5
+                    $ref: '#/node-output/Set variable 5/response/payload'
+                  - variable: Setvariable
+                    $ref: '#/node-output/Set variable/response/payload'
+                  - variable: dBasketPOST4
+                    $ref: '#/node-output/dBasket POST 4/response/payload'
+                  - variable: dBasketPOST4Metadata
+                    $ref: '#/node-output/dBasket POST 4/response'
+                  - variable: HTTPInvokemethod
+                    $ref: '#/node-output/HTTP Invoke method/response/payload'
+                  - variable: HTTPInvokemethodMetadata
+                    $ref: '#/node-output/HTTP Invoke method/response'
+                  - variable: Setvariable2
+                    $ref: '#/node-output/Set variable 2/response/payload'
+                  - variable: Setvariable3
+                    $ref: '#/node-output/Set variable 3/response/payload'
+                  - variable: dBasketPOST
+                    $ref: '#/node-output/dBasket POST/response/payload'
+                  - variable: dBasketPOSTMetadata
+                    $ref: '#/node-output/dBasket POST/response'
+                  - variable: flowDetails
+                    $ref: '#/flowDetails'
+              mode: parallel
+              continue-on-error: false
+              map:
+                $map: http://ibm.com/appconnect/map/v1
+                customSchemas:
+                  properties.`output`:
+                    type: object
+                    properties:
+                      filesWritten:
+                        type: array
+                        items:
+                          type: string
+                input:
+                  - variable: Foreachitem
+                    $ref: '#/block/For each/current-item'
+                  - variable: api
+                    $ref: '#/trigger/api/parameters'
+                  - variable: HTTPInvokemethod2
+                    $ref: >-
+                      #/block/For each/node-output/HTTP Invoke method
+                      2/response/payload
+                  - variable: HTTPInvokemethod2Metadata
+                    $ref: '#/block/For each/node-output/HTTP Invoke method 2/response'
+                  - variable: Setvariable4
+                    $ref: >-
+                      #/block/For each/node-output/Set variable
+                      4/response/payload
+                  - variable: IBMCloudObjectStorageS3Createobject
+                    $ref: >-
+                      #/block/For each/node-output/IBM Cloud Object Storage S3
+                      Create object/response/payload
+                  - variable: testClienttestclient3
+                    $ref: >-
+                      #/block/For each/node-output/testClient testclient
+                      3/response/payload
+                  - variable: testClienttestclient3Metadata
+                    $ref: >-
+                      #/block/For each/node-output/testClient testclient
+                      3/response
+                  - variable: Setvariable
+                    $ref: '#/node-output/Set variable/response/payload'
+                  - variable: testClienttestclient2
+                    $ref: '#/node-output/testClient testclient 2/response/payload'
+                  - variable: testClienttestclient2Metadata
+                    $ref: '#/node-output/testClient testclient 2/response'
+                  - variable: HTTPInvokemethod
+                    $ref: '#/node-output/HTTP Invoke method/response/payload'
+                  - variable: HTTPInvokemethodMetadata
+                    $ref: '#/node-output/HTTP Invoke method/response'
+                  - variable: Setvariable2
+                    $ref: '#/node-output/Set variable 2/response/payload'
+                  - variable: Setvariable3
+                    $ref: '#/node-output/Set variable 3/response/payload'
+                  - variable: testClienttestclient
+                    $ref: '#/node-output/testClient testclient/response/payload'
+                  - variable: testClienttestclientMetadata
+                    $ref: '#/node-output/testClient testclient/response'
+                mappings:
+                  - output:
+                      mappings:
+                        - filesWritten:
+                            expression: $append([],$Setvariable4.variable.filename)
+              display-name: page
+          - response:
+              name: response-1
+              reply-maps:
+                - title: mxdata successfully add custom operation
+                  status-code: 200
+                  map:
+                    mappings:
+                      - filesWritten:
+                          expression: $Foreach.output.filesWritten
+                      - queryParams:
+                          template: '{{$Setvariable.variable.query}}'
+                    $map: http://ibm.com/appconnect/map/v1
+                    input:
+                      - variable: Request
+                        $ref: '#/trigger/payload'
+                      - variable: dBasketPOST2
+                        $ref: '#/node-output/dBasket POST 2/response/payload'
+                      - variable: dBasketPOST2Metadata
+                        $ref: '#/node-output/dBasket POST 2/response'
+                      - variable: If3
+                        $ref: '#/node-output/If 3/response/payload'
+                      - variable: Setvariable5
+                        $ref: '#/node-output/Set variable 5/response/payload'
+                      - variable: Setvariable
+                        $ref: '#/node-output/Set variable/response/payload'
+                      - variable: dBasketPOST4
+                        $ref: '#/node-output/dBasket POST 4/response/payload'
+                      - variable: dBasketPOST4Metadata
+                        $ref: '#/node-output/dBasket POST 4/response'
+                      - variable: HTTPInvokemethod
+                        $ref: '#/node-output/HTTP Invoke method/response/payload'
+                      - variable: HTTPInvokemethodMetadata
+                        $ref: '#/node-output/HTTP Invoke method/response'
+                      - variable: Setvariable2
+                        $ref: '#/node-output/Set variable 2/response/payload'
+                      - variable: Setvariable3
+                        $ref: '#/node-output/Set variable 3/response/payload'
+                      - variable: dBasketPOST
+                        $ref: '#/node-output/dBasket POST/response/payload'
+                      - variable: dBasketPOSTMetadata
+                        $ref: '#/node-output/dBasket POST/response'
+                      - variable: Foreach
+                        $ref: '#/node-output/For each/response/payload'
+                      - variable: flowDetails
+                        $ref: '#/flowDetails'
+                  input: []
+    assembly-2:
+      assembly:
+        execute:
+          - custom-action:
+              name: HTTP Invoke method 2
+              target:
+                $ref: '#/integration/action-interfaces/action-interface-4'
+              action: INVOKE
+              map:
+                mappings:
+                  - continue2xx:
+                      expression: 'false'
+                  - method:
+                      template: GET
+                  - url:
+                      template: >-
+                        {{$Request.mxRequest.MXURL}}/maximo/api/os/{{$Request.mxRequest.FROM}}?{{$Setvariable.variable.query}}&pageno={{$Foreachitem}}&_format=csv
+                $map: http://ibm.com/appconnect/map/v1
+                input:
+                  - variable: Foreachitem
+                    $ref: '#/block/For each/current-item'
+                  - variable: Request
+                    $ref: '#/trigger/payload'
+                  - variable: If3
+                    $ref: '#/node-output/If 3/response/payload'
+                  - variable: dBasketPOST
+                    $ref: '#/node-output/dBasket POST/response/payload'
+                  - variable: dBasketPOSTMetadata
+                    $ref: '#/node-output/dBasket POST/response'
+                  - variable: Setvariable5
+                    $ref: '#/node-output/Set variable 5/response/payload'
+                  - variable: Setvariable
+                    $ref: '#/node-output/Set variable/response/payload'
+                  - variable: HTTPInvokemethod
+                    $ref: '#/node-output/HTTP Invoke method/response/payload'
+                  - variable: HTTPInvokemethodMetadata
+                    $ref: '#/node-output/HTTP Invoke method/response'
+                  - variable: Setvariable2
+                    $ref: '#/node-output/Set variable 2/response/payload'
+                  - variable: Setvariable3
+                    $ref: '#/node-output/Set variable 3/response/payload'
+                  - variable: dBasketPOST3
+                    $ref: '#/node-output/dBasket POST 3/response/payload'
+                  - variable: dBasketPOST3Metadata
+                    $ref: '#/node-output/dBasket POST 3/response'
+                  - variable: flowDetails
+                    $ref: '#/flowDetails'
+          - set-variable:
+              name: Set variable 4
+              map:
+                $map: http://ibm.com/appconnect/map/v1
+                customSchemas:
+                  properties.`variable`:
+                    type: object
+                    properties:
+                      filename:
+                        type: string
+                input:
+                  - variable: Foreachitem
+                    $ref: '#/block/For each/current-item'
+                  - variable: Request
+                    $ref: '#/trigger/payload'
+                  - variable: HTTPInvokemethod2
+                    $ref: >-
+                      #/block/For each/node-output/HTTP Invoke method
+                      2/response/payload
+                  - variable: HTTPInvokemethod2Metadata
+                    $ref: '#/block/For each/node-output/HTTP Invoke method 2/response'
+                  - variable: If3
+                    $ref: '#/node-output/If 3/response/payload'
+                  - variable: dBasketPOST
+                    $ref: '#/node-output/dBasket POST/response/payload'
+                  - variable: dBasketPOSTMetadata
+                    $ref: '#/node-output/dBasket POST/response'
+                  - variable: Setvariable5
+                    $ref: '#/node-output/Set variable 5/response/payload'
+                  - variable: Setvariable
+                    $ref: '#/node-output/Set variable/response/payload'
+                  - variable: HTTPInvokemethod
+                    $ref: '#/node-output/HTTP Invoke method/response/payload'
+                  - variable: HTTPInvokemethodMetadata
+                    $ref: '#/node-output/HTTP Invoke method/response'
+                  - variable: Setvariable2
+                    $ref: '#/node-output/Set variable 2/response/payload'
+                  - variable: Setvariable3
+                    $ref: '#/node-output/Set variable 3/response/payload'
+                  - variable: flowDetails
+                    $ref: '#/flowDetails'
+                mappings:
+                  - variable:
+                      mappings:
+                        - filename:
+                            template: >-
+                              {{ "MX_" & $Request.mxRequest.CUSTOMER & "_" &
+                              $Request.mxRequest.FROM & "_" &
+                              $Setvariable5.variable.batchTimestamp 
+                              &"_"&$Foreachitem  }}.csv
+          - create-action:
+              name: SFTP Create file
+              target:
+                $ref: '#/integration/action-interfaces/action-interface-8'
+              map:
+                mappings:
+                  - data:
+                      template: '{{$HTTPInvokemethod2.responseBody}}'
+                  - path:
+                      template: >-
+                        ./{{$Request.mxRequest.CUSTOMER}}/generic/unprocessed/{{$Setvariable4.variable.filename}}
+                  - type:
+                      template: Text
+                $map: http://ibm.com/appconnect/map/v1
+                input:
+                  - variable: Foreachitem
+                    $ref: '#/block/For each/current-item'
+                  - variable: Request
+                    $ref: '#/trigger/payload'
+                  - variable: HTTPInvokemethod2
+                    $ref: >-
+                      #/block/For each/node-output/HTTP Invoke method
+                      2/response/payload
+                  - variable: HTTPInvokemethod2Metadata
+                    $ref: '#/block/For each/node-output/HTTP Invoke method 2/response'
+                  - variable: Setvariable4
+                    $ref: >-
+                      #/block/For each/node-output/Set variable
+                      4/response/payload
+                  - variable: If3
+                    $ref: '#/node-output/If 3/response/payload'
+                  - variable: dBasketPOST
+                    $ref: '#/node-output/dBasket POST/response/payload'
+                  - variable: dBasketPOSTMetadata
+                    $ref: '#/node-output/dBasket POST/response'
+                  - variable: Setvariable5
+                    $ref: '#/node-output/Set variable 5/response/payload'
+                  - variable: Setvariable
+                    $ref: '#/node-output/Set variable/response/payload'
+                  - variable: HTTPInvokemethod
+                    $ref: '#/node-output/HTTP Invoke method/response/payload'
+                  - variable: HTTPInvokemethodMetadata
+                    $ref: '#/node-output/HTTP Invoke method/response'
+                  - variable: Setvariable2
+                    $ref: '#/node-output/Set variable 2/response/payload'
+                  - variable: Setvariable3
+                    $ref: '#/node-output/Set variable 3/response/payload'
+                  - variable: flowDetails
+                    $ref: '#/flowDetails'
+  name: PLUSZMXTOSFTP
+models:
+  mxdata:
+    name: mxdata
+    properties:
+      dummyid:
+        required: false
+        id: true
+        type: string
+      filesWritten:
+        required: false
+        id: false
+        type:
+          - string
+      queryParams:
+        required: false
+        id: false
+        type: string
+    plural: mxdata
+    description: ' '
+    operations:
+      extract: '#/integration/assemblies/assembly-1'
+    methods:
+      extract:
+        name: extract
+        display:
+          name: extract
+        accessType: WRITE
+        accepts:
+          - arg: data
+            type: query
+            http:
+              source: body
+        returns:
+          arg: data
+          type: mxdata
+          root: true
+        http:
+          verb: POST
+          path: /extract
+        description: >-
+          Extract data from Maximo using HTTP node and write to CSV file to an
+          SFTP server
+  query:
+    name: query
+    properties:
+      id:
+        required: false
+        id: true
+        type: string
+      mxRequest:
+        required: false
+        id: false
+        type:
+          SELECT:
+            required: false
+            id: false
+            type: string
+          FROM:
+            required: false
+            id: false
+            type: string
+          WHERE:
+            required: false
+            id: false
+            type: string
+          ORDERBY:
+            required: false
+            id: false
+            type: string
+          PAGESIZE:
+            required: false
+            id: false
+            type: number
+          CUSTOMER:
+            required: false
+            id: false
+            type: string
+          LASTSTARTDATE:
+            required: false
+            id: false
+            type: string
+          OVERRIDESTARTDATE:
+            required: false
+            id: false
+            type: string
+          OVERRIDEENDDATE:
+            required: false
+            id: false
+            type: string
+          TARGETDATECOLUMN:
+            required: false
+            id: false
+            type: string
+          MXURL:
+            required: false
+            id: false
+            type: string
+          SAVEDQUERY:
+            required: false
+            id: false
+            type: string
+    plural: query
+    description: ' '
+    operations: {}

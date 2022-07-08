@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<product>	
+        <name>IBM Maximo Connector for Envizi Applications</name>
+	<version>
+		<major>8</major>
+		<minor>0</minor>
+		<modlevel>1</modlevel>
+		<patch>0</patch>
+		<build>20220707-1401</build>
+	</version>
+	<dbmaxvarname>ENVIZI</dbmaxvarname>
+	<dbscripts>envizi</dbscripts>
+	<dbversion>V7610-01</dbversion>
+	<lastdbversion>V7610-00</lastdbversion>
+	<excludepatch>1</excludepatch>
+</product>
