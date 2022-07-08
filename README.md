@@ -65,7 +65,7 @@
 
 Within Maximo, the integration provides integration components (via .dbc script files) and Java Classes as part of the solution. These components need to be installed in the customer's Maximo environment. Components and other content created for this integration solution will be identified by names that begin with PLUSZ.
 
-1. On the Maximo Admin workstation, overlay the Maximo SMP directory (`/opt/IBM/SMP/maximo`) with the contents from the solution zip file that is provided. This will lay downthe Java Classes and .dbc files provided with the solution.
+1. On the Maximo Admin workstation, overlay the Maximo SMP directory (`/opt/IBM/SMP/maximo`) with the contents from the solution zip file that is provided. This will lay down the Java Classes and .dbc files provided with the solution.
 
 2. Shutdown the MXServer
 
@@ -89,7 +89,7 @@ Within Maximo, the integration provides integration components (via .dbc script 
 ### Configuring Artifacts
 
 #### Meter Groups
-- Make sure all the Meters that you want to sync with Envizi are in the right meter groups:
+- Make sure all the Meters that need to sync with Envizi are in the right meter groups:
     - `PLUSZ_ELEC` - Electric Meters
     - `PLUSZ_GAS` - Natural Gas Meters
     - `PLUSZ_WTR` - Water Meters
@@ -106,16 +106,16 @@ Within Maximo, the integration provides integration components (via .dbc script 
 
 - Configure the parameters required to execute the AppConnect flow
     - `URL`: Full URL to the flow's API as show in AppConnect "API Documentation Link"
-    - `HEADERS`: Replace the `YourAPIKeyHere` with your AppConnect flow's API Key
-        - By default your AppConnect flow will be look for API key in the `X-IBM-Client-Id` header
-        - If your API Key is `123`, the final value in this field will be `X-IBM-Client-Id: 123,Content-Type: application/json`
+    - `HEADERS`: Replace the `YourAPIKeyHere` with the AppConnect flow's API Key
+        - By default the AppConnect flow will be looking for the API key in the `X-IBM-Client-Id` header
+        - If the API Key is `123`, the final value in this field will be `X-IBM-Client-Id: 123,Content-Type: application/json`
         - **Do not** remove `,Content-Type:application/json`
     - `HTTPMETHOD`: Do not change the default value `POST`
 <img width="946" alt="End Points - Configuration" src="https://media.github.ibm.com/user/375131/files/5787e680-f7dd-11ec-93af-d44216ffbf86">
 
 - Click on "Save End Point" in "Common Actions" on the left side
 
-Your End Point is now been configured in 
+The End Point is now configured 
 
 #### Crons
 
@@ -126,26 +126,26 @@ This is for pulling the live or recent data, which is supposed to run frequently
 
 Based on its running frequency, the system will automatically decide the window of dates/timestamps to pull the data from.
 
-These Cron Task Instances will will suffix `_ALWAYS_ON`
+These Cron Task Instances will use the suffix `_ALWAYS_ON`
 
 <img width="360" alt="Cron task instance - always on" src="https://media.github.ibm.com/user/375131/files/27732000-f7aa-11ec-82f3-0b1e39ea5c02">
 
 
 ##### On-demand Cron (Cron-demand)
-Even though this is a Cron, this is supposed to run just once, on-demand, when the customer or the user wants to pull data between fixed dates/timestamps. Once its first cron event executes, it should be stopped in order to prevent same data getting pulled again and again. _This is a stop-gap for now as we dont have another way from Maximo to call a preconfigured API on-demand._
+Even though this is a Cron, this is supposed to run just once, on-demand, when the customer or the user wants to pull data between fixed dates/timestamps. Once the first cron event executes, it should be stopped in order to prevent the same data getting pulled again and again. _This is a stop-gap for now as we dont have another way from Maximo to call a preconfigured API on-demand._
 
 This might be needed during initial setup of the system, as the Always-on Cron will start pulling data that has arrived after it has been started. This can also be used anytime in the future if there is any need to pull any historical data on-demand.
 
 The start date (`OVERRIDESTARTDATE`) and end date (`OVERRIDEENDDATE`) have to be configured before the cron is started. 
 
-These Cron Task Instances will will suffix `ON_DEMAND`
+These Cron Task Instances will use the suffix `ON_DEMAND`
 
 <img width="356" alt="Cron task instance - on demand" src="https://media.github.ibm.com/user/375131/files/6e611580-f7aa-11ec-80ac-5378b76aa2a9">
 
 
 ##### Basic Parameters
 
-- `MXURL`: The base URL of your Maximo instance. This would include the protocol, domain name and the port number. Do not put a trailing `/` at the end. In the absense of port number, the default port for the protocol will be used _(80 for http, 443 for https)_.
+- `MXURL`: The base URL of the Maximo instance. This would include the protocol, domain name and the port number. Do not put a trailing `/` at the end. In the absense of port number, the default port for the protocol will be used _(80 for http, 443 for https)_.
     - e.g. http://example.maximo.com:9080
 
 - `CUSTOMER`: Name of the customer. This will be used to name the CSV files. To be supplied by Envizi.
@@ -166,10 +166,10 @@ These will be set to the right values by default. DO NOT change these parameters
 - `FROM`: Name of the Object Structure
 - `WHERE`: _(Optional)._ OSLC Condition for data selection
 - `ORDERBY`: _(Optional)._ Sequence by which the data should be pulled
-- `TARGETDATECOLUMN`: Name of the DateTime Column in Object structure that will be used to filter records beween a date-time window.
+- `TARGETDATECOLUMN`: Name of the DateTime Column in the Object structure that will be used to filter records between a date-time window.
 - `SAVEDQUERY`
-- `ENDPOINTNAME` - Name of Maximo End Point configured to connect to AppConnect flow.
-- `PAGESIZE` - Maximum number of records pulled from Maximo in one API call. This will also be the maximum number of in a CSV file.
+- `ENDPOINTNAME` - Name of the Maximo End Point configured to connect to the AppConnect flow.
+- `PAGESIZE` - Maximum number of records pulled from Maximo in one API call. This will also be the maximum number of records in the CSV file.
 
 ##### Configuring Cron Task
 
@@ -182,31 +182,31 @@ These will be set to the right values by default. DO NOT change these parameters
 - Click on the "PLUSZEXPORT" Cron Task
 - In the Cron Task Instances, click on the Schedule/Calendar icon to set the schedule for the Cron Task Instance
 - Once it is configured, click on "OK"
-- Select the Cron Task Instance that you want to configure Parameters for
-- Scroll down to the "Cron Task Parameters" section and configure the "Value" column as needed. Ideally, you will only have to edit the `CUSTOMER` and `MXURL` parameters for all instances. For the "On-demand" Crons, you will have to edit the `OVERRIDESTARTDATE` and `OVERRIDEENDDATE`.
+- Select the Cron Task Instance to configure Parameters for
+- Scroll down to the "Cron Task Parameters" section and configure the "Value" column as needed. Ideally, only the `CUSTOMER` and `MXURL` parameters will need to be edited for all instances. For the "On-demand" Crons, the `OVERRIDESTARTDATE` and `OVERRIDEENDDATE` parameters will need to be edited.
 - Click on Save
 
 ##### Start/Stop the Cron Task Instance
 - Navigate inside the Cron Task as mentioned above
-- Enable/Disable the checkbox in the column "Active?" in front of the Cron Task Instance you want to Start/Stop
+- Enable/Disable the checkbox in the column "Active?" in front of the desired Cron Task Instance
 - Click on Save
 
 ## AppConnect Configuration
 
 Note: You need IBM Cloud AppConnect Professional or Enterprise to run this flow.
 
-Note: The names in the screenshots are generic, so the flow that you will be setting up will not have same names.
+Note: The names in the screenshots are generic, other instances will not have the same names during setup.
 
 ### Adding Accounts
 
-Before you import the flow to AppConnect, you will have to add Accounts for SFTP and HTTP connectors.
+Before importing the flow to AppConnect, add Accounts for SFTP and HTTP connectors.
 
-- Navigate to Catalog section of your AppConnect instance
+- Navigate to Catalog section of the AppConnect instance
 <img width="960" alt="Create Account 1" src="https://media.github.ibm.com/user/375131/files/eb8b5a00-eb1d-11ec-8401-35b47d561ce4">
 
-- In the "Search application", type name of the connector you want to add account for
+- In the "Search application", type name of the connector to add the account for
 
-- If your AppConnect instance does not have an account for the connector, click on "Connect" to create a new account
+- If the AppConnect instance does not have an account for the connector, click on "Connect" to create a new account
 <img width="960" alt="Create Account 2a" src="https://media.github.ibm.com/user/375131/files/ec23f080-eb1d-11ec-9f62-af1addec3fd3">
 
 - Else, open the account selection drop down, and click on "Add a new account ..."
@@ -224,30 +224,30 @@ Before you import the flow to AppConnect, you will have to add Accounts for SFTP
 - Click on the kebab menu (three dots) and select "Rename Account"
 <img width="960" alt="Create Account 5" src="https://media.github.ibm.com/user/375131/files/ededb400-eb1d-11ec-9a29-fd9fa65dbf8b">
 
-- Enter an account name and click on "Rename Account". This is the name that you will configure the connector in flow to use.
+- Enter an account name and click on "Rename Account". This name can now be used by the connector in the flow.
 <img width="958" alt="Create Account 6" src="https://media.github.ibm.com/user/375131/files/ee864a80-eb1d-11ec-96d1-fdc42c679896">
 
 ### Importing the flow
 
-- Open the Dashboard of your AppConnect instance
+- Open the Dashboard of the AppConnect instance
 - Click on the "New" button and select "Import Flow"
 <img width="861" alt="Flow Import 0" src="https://media.github.ibm.com/user/375131/files/ea582e00-eb19-11ec-9912-0881d321f3c7">
 
 - Browse to the flow's YAML file and click on "Import"
 <img width="960" alt="Flow Import 1" src="https://media.github.ibm.com/user/375131/files/ea582e00-eb19-11ec-88a7-abebff4e0534">
 
-- Your flow will now be imported and opened.
+- The flow will now be imported and opened.
 <img width="960" alt="Flow Import 2" src="https://media.github.ibm.com/user/375131/files/eaf0c480-eb19-11ec-885b-919da812499b">
 
 ### Configuring the flow to use the right accounts
 
-When you any import flow, it is important to check if the flow is using the right accounts for the different connectors.
+When importing a flow, it is important to check if the flow is using the right accounts for the different connectors.
 
 - Click on "Edit Flow"
 
 - See if the connectors are using the right accounts.
 
-- To change account for any connector, select the connector and click on the dropdown icon next to the Account's name
+- To change the account for any connector, select the connector and click on the dropdown icon next to the Account's name
 <img width="960" alt="Select Account 1" src="https://media.github.ibm.com/user/375131/files/11186380-eb1e-11ec-9c92-5f892df61a57">
 
 - Select the account name that you want to use from the list
@@ -256,15 +256,15 @@ When you any import flow, it is important to check if the flow is using the righ
 
 ### Starting and Stopping the flow
 
-- If you are on AppConnect Dashboard, Click on the kebab menu (three dots) on the flow's tile.
+- If using AppConnect Dashboard, Click on the kebab menu (three dots) on the flow's tile.
 <img width="656" alt="Flow start 1" src="https://media.github.ibm.com/user/375131/files/5be4ac00-eb1b-11ec-85b0-b7b2d400a7e1">
 
-- If you are inside the flow, Click on the kebab menu (three dots) on top right of the screen.
+- If inside the flow, Click on the kebab menu (three dots) on top right of the screen.
 <img width="959" alt="Flow start 2" src="https://media.github.ibm.com/user/375131/files/5be4ac00-eb1b-11ec-93f2-4031220e144f">
 
 - Click on "Start API" or "Stop API" depending on what action you want to perform.
 
-_Note: If your flow is not running, AppConnect will give Error 404 on the API call._
+_Note: If the flow is not running, AppConnect will give Error 404 on the API call._
 
 ### Creating API Key
 
@@ -281,13 +281,13 @@ _Note: If your flow is not running, AppConnect will give Error 404 on the API ca
 
 - Open the "API Documentation Link" in another tab.
 
-- Click on the Route you want to see the URL for
+- Click on the Route to see the URL
 <img width="958" alt="Flow API Key 4" src="https://media.github.ibm.com/user/375131/files/14115500-eb1a-11ec-8988-315fe623751c">
 
-- Copy the link show in details tab next to its HTTP Method
+- Copy the link show in details tab next to the HTTP Method
 <img width="960" alt="Flow API Key 5" src="https://media.github.ibm.com/user/375131/files/14115500-eb1a-11ec-8bce-d7751c8e9141">
 
-You may want to use a tool like Postman to test this API prior to testing it for the first time from Maximo.
+It is helpful to use a tool like Postman to test this API prior to testing it for the first time from Maximo.
 
 ## Working of the flow
 
