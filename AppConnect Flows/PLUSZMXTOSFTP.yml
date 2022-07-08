@@ -281,10 +281,6 @@ integration:
                     $ref: '#/trigger/payload'
                   - variable: If3
                     $ref: '#/node-output/If 3/response/payload'
-                  - variable: dBasketPOST
-                    $ref: '#/node-output/dBasket POST/response/payload'
-                  - variable: dBasketPOSTMetadata
-                    $ref: '#/node-output/dBasket POST/response'
                   - variable: Setvariable5
                     $ref: '#/node-output/Set variable 5/response/payload'
                   - variable: Setvariable
@@ -367,10 +363,6 @@ integration:
                     $ref: '#/node-output/Set variable 5/response/payload'
                   - variable: Setvariable
                     $ref: '#/node-output/Set variable/response/payload'
-                  - variable: dBasketPOST4
-                    $ref: '#/node-output/dBasket POST 4/response/payload'
-                  - variable: dBasketPOST4Metadata
-                    $ref: '#/node-output/dBasket POST 4/response'
                   - variable: HTTPInvokemethod
                     $ref: '#/node-output/HTTP Invoke method/response/payload'
                   - variable: HTTPInvokemethodMetadata
@@ -379,10 +371,6 @@ integration:
                     $ref: '#/node-output/Set variable 2/response/payload'
                   - variable: Setvariable3
                     $ref: '#/node-output/Set variable 3/response/payload'
-                  - variable: dBasketPOST
-                    $ref: '#/node-output/dBasket POST/response/payload'
-                  - variable: dBasketPOSTMetadata
-                    $ref: '#/node-output/dBasket POST/response'
                   - variable: flowDetails
                     $ref: '#/flowDetails'
               mode: parallel
@@ -463,20 +451,12 @@ integration:
                     input:
                       - variable: Request
                         $ref: '#/trigger/payload'
-                      - variable: dBasketPOST2
-                        $ref: '#/node-output/dBasket POST 2/response/payload'
-                      - variable: dBasketPOST2Metadata
-                        $ref: '#/node-output/dBasket POST 2/response'
                       - variable: If3
                         $ref: '#/node-output/If 3/response/payload'
                       - variable: Setvariable5
                         $ref: '#/node-output/Set variable 5/response/payload'
                       - variable: Setvariable
                         $ref: '#/node-output/Set variable/response/payload'
-                      - variable: dBasketPOST4
-                        $ref: '#/node-output/dBasket POST 4/response/payload'
-                      - variable: dBasketPOST4Metadata
-                        $ref: '#/node-output/dBasket POST 4/response'
                       - variable: HTTPInvokemethod
                         $ref: '#/node-output/HTTP Invoke method/response/payload'
                       - variable: HTTPInvokemethodMetadata
@@ -485,10 +465,6 @@ integration:
                         $ref: '#/node-output/Set variable 2/response/payload'
                       - variable: Setvariable3
                         $ref: '#/node-output/Set variable 3/response/payload'
-                      - variable: dBasketPOST
-                        $ref: '#/node-output/dBasket POST/response/payload'
-                      - variable: dBasketPOSTMetadata
-                        $ref: '#/node-output/dBasket POST/response'
                       - variable: Foreach
                         $ref: '#/node-output/For each/response/payload'
                       - variable: flowDetails
@@ -519,10 +495,6 @@ integration:
                     $ref: '#/trigger/payload'
                   - variable: If3
                     $ref: '#/node-output/If 3/response/payload'
-                  - variable: dBasketPOST
-                    $ref: '#/node-output/dBasket POST/response/payload'
-                  - variable: dBasketPOSTMetadata
-                    $ref: '#/node-output/dBasket POST/response'
                   - variable: Setvariable5
                     $ref: '#/node-output/Set variable 5/response/payload'
                   - variable: Setvariable
@@ -535,10 +507,6 @@ integration:
                     $ref: '#/node-output/Set variable 2/response/payload'
                   - variable: Setvariable3
                     $ref: '#/node-output/Set variable 3/response/payload'
-                  - variable: dBasketPOST3
-                    $ref: '#/node-output/dBasket POST 3/response/payload'
-                  - variable: dBasketPOST3Metadata
-                    $ref: '#/node-output/dBasket POST 3/response'
                   - variable: flowDetails
                     $ref: '#/flowDetails'
           - set-variable:
@@ -564,10 +532,6 @@ integration:
                     $ref: '#/block/For each/node-output/HTTP Invoke method 2/response'
                   - variable: If3
                     $ref: '#/node-output/If 3/response/payload'
-                  - variable: dBasketPOST
-                    $ref: '#/node-output/dBasket POST/response/payload'
-                  - variable: dBasketPOSTMetadata
-                    $ref: '#/node-output/dBasket POST/response'
                   - variable: Setvariable5
                     $ref: '#/node-output/Set variable 5/response/payload'
                   - variable: Setvariable
@@ -622,10 +586,6 @@ integration:
                       4/response/payload
                   - variable: If3
                     $ref: '#/node-output/If 3/response/payload'
-                  - variable: dBasketPOST
-                    $ref: '#/node-output/dBasket POST/response/payload'
-                  - variable: dBasketPOSTMetadata
-                    $ref: '#/node-output/dBasket POST/response'
                   - variable: Setvariable5
                     $ref: '#/node-output/Set variable 5/response/payload'
                   - variable: Setvariable
