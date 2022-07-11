@@ -23,6 +23,7 @@
     * [Configuring the flow to use the right accounts](#configuring-the-flow-to-use-the-right-accounts)
     * [Starting and Stopping the flow](#starting-and-stopping-the-flow)
     * [Creating API Key](#creating-api-key)
+  * [Post-Setup Instructions](#post-setup-instructions)
   * [Working of the flow](#working-of-the-flow)
 <!--te-->
 
@@ -290,6 +291,13 @@ _Note: If the flow is not running, AppConnect will give Error 404 on the API cal
 <img width="960" alt="Flow API Key 5" src="https://media.github.ibm.com/user/375131/files/14115500-eb1a-11ec-8bce-d7751c8e9141">
 
 It is helpful to use a tool like Postman to test this API prior to testing it for the first time from Maximo.
+
+## Post-Setup Instructions
+
+The Envizi implementation team will support the next steps of the integration by provisioning the file transfer details, enabling Envizi data connectors and validating the Envizi configuration ready to receive the data flow.
+
+Please reach out to the primary contact at Envizi who can help coordinate next steps.
+
 
 ## Working of the flow
 
