@@ -5,7 +5,7 @@
 <!--ts-->
   * [Overview](#overview)
   * [Maximo Configuration](#maximo-configuration)
-    * [Pre-checks on your data](#pre-checks-on-your-data)
+    * [Pre-checks on the data](#pre-checks-on-the-data)
     * [Deploying Maximo Build](#deploying-maximo-build)
     * [Configuring Artifacts](#configuring-artifacts)
         * [Meter Groups](#meter-groups)
@@ -31,7 +31,7 @@
 
 ## Maximo Configuration
 
-### Pre-checks on your data
+### Pre-checks on the data
 
 - Data for Location Meter will not be exported to Envizi if the Unit of Measurement is not configured.
 - The current integration with Envizi only supports the following Units of Measurement for the Location Meter data:
@@ -193,7 +193,7 @@ These will be set to the right values by default. DO NOT change these parameters
 
 ## AppConnect Configuration
 
-Note: You need IBM Cloud AppConnect Professional or Enterprise to run this flow.
+Note: IBM Cloud AppConnect Professional or Enterprise is needed to run this flow.
 
 Note: The names in the screenshots are generic, other instances will not have the same names during setup.
 
@@ -220,7 +220,7 @@ Before importing the flow to AppConnect, add Accounts for SFTP and HTTP connecto
 - Click on Connect
 <img width="960" alt="Create Account 4" src="https://media.github.ibm.com/user/375131/files/ed551d80-eb1d-11ec-983c-c276d43e0654">
 
-- From the account selection drop down, select the newly created account. e.g., The default name will be `Account 2` if you already have `Account 1`
+- From the account selection drop down, select the newly created account. e.g., The default name will be `Account 2` if `Account 1` is already present
 - Click on the kebab menu (three dots) and select "Rename Account"
 <img width="960" alt="Create Account 5" src="https://media.github.ibm.com/user/375131/files/ededb400-eb1d-11ec-9a29-fd9fa65dbf8b">
 
@@ -250,7 +250,7 @@ When importing a flow, it is important to check if the flow is using the right a
 - To change the account for any connector, select the connector and click on the dropdown icon next to the Account's name
 <img width="960" alt="Select Account 1" src="https://media.github.ibm.com/user/375131/files/11186380-eb1e-11ec-9c92-5f892df61a57">
 
-- Select the account name that you want to use from the list
+- Select the account name to use from the list
 <img width="659" alt="Select Account 2" src="https://media.github.ibm.com/user/375131/files/11b0fa00-eb1e-11ec-88fd-8e4998f6304a">
 
 
@@ -262,7 +262,7 @@ When importing a flow, it is important to check if the flow is using the right a
 - If inside the flow, Click on the kebab menu (three dots) on top right of the screen.
 <img width="959" alt="Flow start 2" src="https://media.github.ibm.com/user/375131/files/5be4ac00-eb1b-11ec-93f2-4031220e144f">
 
-- Click on "Start API" or "Stop API" depending on what action you want to perform.
+- Click on "Start API" or "Stop API" depending on which action is desired.
 
 _Note: If the flow is not running, AppConnect will give Error 404 on the API call._
 
