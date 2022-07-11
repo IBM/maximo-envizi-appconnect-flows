@@ -89,12 +89,14 @@ Within Maximo, the integration provides integration components (via .dbc script 
 ### Configuring Artifacts
 
 #### Meter Groups
-- Make sure all the Meters that need to sync with Envizi are in the right meter groups:
+- Make sure all the Meters that need to be synced with Envizi are in the right meter groups:
     - `PLUSZ_ELEC` - Electric Meters
     - `PLUSZ_GAS` - Natural Gas Meters
     - `PLUSZ_WTR` - Water Meters
 
 #### End Points
+
+_Note: [AppConnect Configuration](#appconnect-configuration) should be done before this step as the flow's URL is needed for the End Point configuration_
 
 - In the Maximo menu, click on Integration > End Points
 <img width="580" alt="End Points - Menu" src="https://media.github.ibm.com/user/375131/files/b7315700-e8ed-11ec-8e95-885b57b97a66">
