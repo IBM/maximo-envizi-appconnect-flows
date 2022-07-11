@@ -292,9 +292,8 @@ It is helpful to use a tool like Postman to test this API prior to testing it fo
 ## Working of the flow
 
 <img width="893" alt="PLUSZMXTOSFTP_P1" src="https://media.github.ibm.com/user/375131/files/4383bb00-f7c4-11ec-9d13-c85b6f8ce6ee">
-<img width="884" alt="PLUSZMXTOSFTP_P2" src="https://media.github.ibm.com/user/375131/files/441c5180-f7c4-11ec-9cbd-229152cebafd">
-<img width="902" alt="PLUSZMXTOSFTP_P3" src="https://media.github.ibm.com/user/375131/files/467eab80-f7c4-11ec-9558-276e2708db02">
-
+<img width="907" alt="PLUSZMXTOSFTP_P2" src="https://media.github.ibm.com/user/375131/files/2d04f000-fea5-11ec-8b45-f560a75df72e">
+<img width="904" alt="PLUSZMXTOSFTP_P3" src="https://media.github.ibm.com/user/375131/files/4017c000-fea5-11ec-8576-014dcf4e4b2f">
 
 #### If
 Checks for the mandatory fields that are required for the flow to function. If any of the fields are missing, the flow returns Error 400.
