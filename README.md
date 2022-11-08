@@ -21,6 +21,7 @@
     * [Adding Accounts](#adding-accounts)
     * [Importing the flow](#importing-the-flow)
     * [Configuring the flow to use the right accounts](#configuring-the-flow-to-use-the-right-accounts)
+    * [Configuring the Flow Parameters](#configuring-the-flow-parameters)
     * [Starting and Stopping the flow](#starting-and-stopping-the-flow)
     * [Creating API Key](#creating-api-key)
   * [Post-Setup Instructions](#post-setup-instructions)
@@ -28,7 +29,7 @@
 <!--te-->
 
 ## Overview
-![Maximo-Envizi Integration](https://media.github.ibm.com/user/375131/files/213f0180-e8d8-11ec-8d47-a276b27d6fb0)
+![Maximo-Envizi Integration](https://media.github.ibm.com/user/375131/files/f5e24080-5f63-11ed-90a6-741f0d6d816b)
 
 ## Maximo Configuration
 
@@ -202,7 +203,7 @@ Note: The names in the screenshots are generic, other instances will not have th
 
 ### Adding Accounts
 
-Before importing the flow to AppConnect, add Accounts for SFTP and HTTP connectors.
+Before importing the flow to AppConnect, add Accounts for "Amazon S3" and "HTTP" connectors.
 
 - Navigate to Catalog section of the AppConnect instance
 <img width="960" alt="Create Account 1" src="https://media.github.ibm.com/user/375131/files/eb8b5a00-eb1d-11ec-8401-35b47d561ce4">
@@ -216,7 +217,7 @@ Before importing the flow to AppConnect, add Accounts for SFTP and HTTP connecto
 <img width="948" alt="Create Account 2b" src="https://media.github.ibm.com/user/375131/files/ecbc8700-eb1d-11ec-9693-4ce83ffda2e6">
 
 - Enter the necessary details for the connector
-    - For SFTP, it will be the SFTP server and user account.
+    - For Amazon S3, it will be the Secret Access Key and Access Key ID provided by Envizi.
     - For HTTP, it will be the Authentication Key or username and password needed for Maximo.
 <img width="960" alt="Create Account 3" src="https://media.github.ibm.com/user/375131/files/ed551d80-eb1d-11ec-9894-350e87fbb2b2">
 
@@ -255,6 +256,14 @@ When importing a flow, it is important to check if the flow is using the right a
 
 - Select the account name to use from the list
 <img width="659" alt="Select Account 2" src="https://media.github.ibm.com/user/375131/files/11b0fa00-eb1e-11ec-88fd-8e4998f6304a">
+
+### Configuring the Flow Parameters
+
+- Scroll to the Amazon S3 node and click on it to open the configuration
+![S3 Configuration](https://media.github.ibm.com/user/375131/files/d860a700-5f62-11ed-867a-cfb69ec890a6)
+
+- From the bucket dropdown, select the bucket name provided by Envizi
+- Perform these actions on all Amazon S3 nodes in the flow
 
 
 ### Starting and Stopping the flow
@@ -301,9 +310,10 @@ Please reach out to the primary contact at Envizi who can help coordinate next s
 
 ## Working of the flow
 
-<img width="893" alt="PLUSZMXTOSFTP_P1" src="https://media.github.ibm.com/user/375131/files/4383bb00-f7c4-11ec-9d13-c85b6f8ce6ee">
-<img width="907" alt="PLUSZMXTOSFTP_P2" src="https://media.github.ibm.com/user/375131/files/2d04f000-fea5-11ec-8b45-f560a75df72e">
-<img width="904" alt="PLUSZMXTOSFTP_P3" src="https://media.github.ibm.com/user/375131/files/4017c000-fea5-11ec-8576-014dcf4e4b2f">
+<img width="893" alt="PLUSZMXTOS3_P1" src="https://media.github.ibm.com/user/375131/files/4383bb00-f7c4-11ec-9d13-c85b6f8ce6ee">
+<img width="907" alt="PLUSZMXTOS3_P2" src="https://media.github.ibm.com/user/375131/files/2d04f000-fea5-11ec-8b45-f560a75df72e">
+<img width="904" alt="PLUSZMXTOS3_P3" src="https://media.github.ibm.com/user/375131/files/55405080-5f64-11ed-8138-1b36551898c9">
+
 
 #### If
 Checks for the mandatory fields that are required for the flow to function. If any of the fields are missing, the flow returns Error 400.
@@ -333,9 +343,9 @@ Does an HTTP GET to the Maximo's OSLC API to fetch the total number of records t
 `totalPages`: Total number of pages to be fetched from Maximo OSLC API that match the query. This is calculated using the `totalCount` from "Set variable 2" and `pagesize` from "Set variable".
 
 #### For each: page
-- Summary: Fetches data from Maximo OSLC API page by page and writes CSV file to the SFTP server.
+- Summary: Fetches data from Maximo OSLC API page by page and writes CSV file to the S3 bucket.
 - Input: An array of numbers from 1 to `totalPages` from "Set variable 3"
-- Output: `fileWritten` - Array of string containing names of files written to the SFTP server.
+- Output: `fileWritten` - Array of string containing names of files written to the S3 bucket.
 
 #### HTTP Invoke method 2
 Does an HTTP GET call to Maximo OSLC API to fetch the data that matches `queryparams` from "Set variable" for the current page from "For each: page"
@@ -345,12 +355,12 @@ Does an HTTP GET call to Maximo OSLC API to fetch the data that matches `querypa
 
 eg. `DemoCorporation_PLUSZLOCATIONS_1654856600431_1.csv`
 
-#### SFTP Create file
-Writes Response body from "HTTP Invoke method 2" to the configured SFTP Server with the `filename` from "Set variable 4" at the preconfigured file path.
+#### Amazon S3 Create object
+Writes Response body from "HTTP Invoke method 2" to the configured S3 Bucket with the `filename` from "Set variable 4" at the preconfigured file path.
 
 #### Response
 Returns HTTP Status 200 with JSON body containing:
-- `filesWritten`: Array of file names written to the SFTP server, obtained from the output of "For each: page"
+- `filesWritten`: Array of file names written to the S3 bucket, obtained from the output of "For each: page"
 - `queryparams`: `query` from "Set variable"
 
 The JSON in response body is not used or stored by Maximo.
