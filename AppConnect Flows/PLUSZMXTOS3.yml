@@ -191,6 +191,8 @@ integration:
                         type: string
                       batchTimestamp:
                         type: string
+                      version:
+                        type: string
                 input:
                   - variable: Request
                     $ref: "#/trigger/payload"
@@ -203,6 +205,8 @@ integration:
                       mappings:
                         - batchTimestamp:
                             template: "{{$millis()}}"
+                        - version:
+                            template: 1.1.0
                         - where:
                             template: '&oslc.where={{$encodeUrlComponent($Request.mxRequest.WHERE ?
                               $Request.mxRequest.WHERE & " AND " &
@@ -556,7 +560,7 @@ integration:
                     $ref: "#/node-output/Set variable 3/response/payload"
                   - variable: flowDetails
                     $ref: "#/flowDetails"
-  name: PLUSZMXTOS3
+  name: PLUSZMXTOS3_v1_1_0
 models:
   mxdata:
     name: mxdata
