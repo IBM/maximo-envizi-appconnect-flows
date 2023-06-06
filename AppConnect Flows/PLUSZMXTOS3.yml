@@ -526,8 +526,8 @@ integration:
                   - ContentType:
                       template: text/plain
                   - Key:
-                      template: "{{$Request.mxRequest.CUSTOMER}}/generic/unprocessed/{{$Setvariable4.\
-                        variable.filename}}"
+                      template: '{{$replace($Request.mxRequest.CUSTOMER,"
+                        ","_")}}/generic/unprocessed/{{$Setvariable4.variable.filename}}'
                   - bucketName:
                       template: envizi-dev
                   - content:
